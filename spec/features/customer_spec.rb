@@ -19,4 +19,19 @@ RSpec.feature "Customers", type: :feature do
     expect(page).to have_content('Novo Cliente')
   end
 
+  scenario 'Cadastra um cliente valido' do
+    visit(new_customer_path)
+    customer_first_name = Faker::Name.first_name
+
+    fill_in('First name', with: customer_first_name)
+    fill_in('Last name', with: Faker::Name.last_name)
+    fill_in('Email', with: Faker::Internet.email)
+    fill_in('Phone', with: Faker::PhoneNumber.phone_number)
+    attach_file('Avatar', "#{Rails.root}/spec/fixtures/batman.jpg")
+    choose(option: ['S', 'N'].sample)
+    click_on('Criar')
+
+    expect(page).to have_content('Cliente cadastrado com sucesso')
+    expect(Customer.last.first_name).to eq(customer_first_name)
+  end
 end

@@ -71,6 +71,8 @@ GEM
     duktape (2.6.0.0)
     erubi (1.10.0)
     execjs (2.8.1)
+    faker (2.18.0)
+      i18n (>= 1.6, < 2)
     ffi (1.15.1)
     ffi (1.15.1-x64-mingw32)
     globalid (0.4.2)
@@ -200,6 +202,7 @@ DEPENDENCIES
   capybara (~> 3.35, >= 3.35.3)
   coffee-rails (~> 4.2)
   duktape
+  faker (~> 2.18)
   jbuilder (~> 2.5)
   puma (~> 3.11)
   rails (~> 5.2.0)
