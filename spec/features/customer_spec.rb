@@ -19,7 +19,8 @@ RSpec.feature "Customers", type: :feature do
     expect(page).to have_content('Novo Cliente')
   end
 
-  scenario 'Cadastra um cliente valido' do
+  scenario 'Cadastra um cliente valido - Create' do
+    # Happy Path -- quando o usuario se comporta da maneira esperada
     visit(new_customer_path)
     customer_first_name = Faker::Name.first_name
 
@@ -34,4 +35,14 @@ RSpec.feature "Customers", type: :feature do
     expect(page).to have_content('Cliente cadastrado com sucesso')
     expect(Customer.last.first_name).to eq(customer_first_name)
   end
+
+  scenario 'Cadastro de cliente invalido' do
+    # Sad Path -- quando o usuario não se comporta da maneira esperada
+    visit(new_customer_path)
+
+    click_on('Criar')
+
+    expect(page).to have_content("can't be blank")
+  end
+
 end
