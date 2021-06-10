@@ -59,4 +59,36 @@ RSpec.feature "Customers", type: :feature do
     expect(page).to have_content(customer.first_name)
   end
 
+  scenario 'Testando Index' do
+    customer1 = Customer.create!(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['S', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/batman.jpg"
+    )
+
+    customer2 = Customer.create!(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['S', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/batman.jpg"
+    )
+
+    customer3 = Customer.create!(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['S', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/batman.jpg"
+    )
+    visit(customers_path)
+
+    expect(page).to have_content(customer1.first_name).and have_content(customer2.first_name).and have_content(customer3.first_name)
+  end
+
 end

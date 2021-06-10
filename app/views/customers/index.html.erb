@@ -3,5 +3,10 @@
 <% end %>
 
 <h1>Clientes</h1>
+<ul>
+  <% @customers.each do |customer| %>
+    <li> <%= customer.first_name %> </li>
+  <% end %>
+</ul>
 
 <%= link_to 'Novo Cliente', new_customer_path %>
