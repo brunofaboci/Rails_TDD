@@ -91,4 +91,24 @@ RSpec.feature "Customers", type: :feature do
     expect(page).to have_content(customer1.first_name).and have_content(customer2.first_name).and have_content(customer3.first_name)
   end
 
+  scenario 'Atualizar um cliente - Update' do
+    customer = Customer.create!(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['S', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/batman.jpg"
+    )
+
+    new_name = Faker::Name.first_name
+    visit(edit_customer_path(customer.id))
+    fill_in('First name', with: new_name)
+    click_on('Salvar')
+
+    expect(page).to have_content('Cliente atualizado com sucesso')
+    expect(page).to have_content(new_name)
+
+  end
+
 end
