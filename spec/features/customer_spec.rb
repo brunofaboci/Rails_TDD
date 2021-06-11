@@ -111,4 +111,36 @@ RSpec.feature "Customers", type: :feature do
 
   end
 
+  scenario 'Clicla no link SHOW' do
+    customer = Customer.create!(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['S', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/batman.jpg"
+    )
+
+    visit(customers_path)
+    find(:xpath, "/html/body/table/tbody/tr[1]/td[4]/a").click
+
+    expect(page).to have_content('Show')  
+  end
+
+  scenario 'Clicla no link EDIT' do
+    customer = Customer.create!(
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['S', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/batman.jpg"
+    )
+
+    visit(customers_path)
+    find(:xpath, "/html/body/table/tbody/tr[1]/td[5]/a").click
+
+    expect(page).to have_content('Editar')  
+  end
+
 end

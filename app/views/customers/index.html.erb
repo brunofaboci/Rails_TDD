@@ -3,10 +3,28 @@
 <% end %>
 
 <h1>Clientes</h1>
-<ul>
-  <% @customers.each do |customer| %>
-    <li> <%= customer.first_name %> </li>
-  <% end %>
-</ul>
+
+<table>
+  <thead>
+    <tr>
+      <td>Nome</td>
+      <td>Sobrenome</td>
+      <td>Email</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.first_name %></td>
+      <td><%= customer.last_name %></td>
+      <td><%= customer.email %></td>
+      <td><%= link_to 'Show', customer_path(customer) %></td>
+      <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Novo Cliente', new_customer_path %>
